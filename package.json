@@ -4,7 +4,7 @@
   "title": "Password Generator",
   "description": "Generate secure password",
   "icon": "extension-icon.png",
-  "author": "try_nayeem659",
+  "author": "naimdotcom",
   "categories": [
     "Security"
   ],
@@ -14,8 +14,16 @@
       "name": "password-generator",
       "title": "password generator",
       "subtitle": "password generator",
-      "description": "password generator",
-      "mode": "view"
+      "description": "generate secure password",
+      "mode": "view",
+      "arguments": [
+        {
+          "name": "length",
+          "type": "text",
+          "required": false,
+          "placeholder": "length"
+        }
+      ]
     }
   ],
   "dependencies": {

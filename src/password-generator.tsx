@@ -1,4 +1,4 @@
-import { ActionPanel, Action, showToast, List, Toast, Clipboard } from "@raycast/api";
+import { ActionPanel, Action, showToast, List, Toast, Clipboard, LaunchProps } from "@raycast/api";
 import crypto from "crypto";
 import { useState, useCallback } from "react";
 
@@ -16,8 +16,16 @@ function generatePassword(length: number = 8): string {
     .join("");
 }
 
-export default function PasswordGeneratorCommand() {
-  const [passwords, setPasswords] = useState<string[]>(() => Array.from({ length: 5 }, () => generatePassword()));
+interface passwordLenArg {
+  length: string;
+}
+
+export default function PasswordGeneratorCommand(props: LaunchProps<{ arguments: passwordLenArg }>) {
+  const propLen =
+    props.arguments.length && !isNaN(parseInt(props.arguments.length, 10)) ? parseInt(props.arguments.length, 10) : 8;
+  const [passwords, setPasswords] = useState<string[]>(() =>
+    Array.from({ length: 5 }, () => generatePassword(propLen)),
+  );
   const [passwordLength, setPasswordLength] = useState<number>(8);
 
   const regeneratePasswords = useCallback(
